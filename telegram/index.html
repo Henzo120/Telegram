@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram </title>
+    <link rel="icon" href="tele1.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #000000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #ffffff;
+            padding: 20px;
+        }
+        
+        .login-content {
+            max-width: 320px;
+            width: 100%;
+            text-align: center;
+            padding-top: 40px; /* Added top padding */
+        }
+        
+        .login-title {
+            font-size: 16px; /* Reduced from 18px */
+            margin-bottom: 24px; /* Reduced from 32px */
+            color: #ffffff;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        
+        .qr-placeholder {
+            background-color: #111111;
+            width: 240px;
+            height: 240px;
+            margin: 0 auto 24px; /* Reduced bottom margin */
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #555555;
+            font-size: 13px; /* Reduced from 14px */
+            overflow: hidden;
+        }
+        
+        .qr-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .steps {
+    text-align: left;
+    margin-bottom: 24px;
+    counter-reset: step;
+}
+
+.step {
+    margin-bottom: 16px;
+    line-height: 1.5;
+    color: #ffffff;
+    font-size: 14px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.step::before {
+    counter-increment: step;
+    content: counter(step);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 16px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 24px;
+    height: 24px;
+    background-color: rgb(86, 70, 208); /* Circle color */
+    border-radius: 50%; /* Makes the circle */
+    text-align: center;
+    line-height: 24px; /* Centers the number vertically */
+}
+
+        .login-link {
+        display: inline-block;
+        color: rgb(86, 70, 208);
+        text-decoration: none;
+        padding: 8px 16px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .login-link::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(62, 61, 62);
+        transition: all 0.5s ease;
+        opacity: 0.3;
+    }
+
+    .login-link:hover {
+        color: white;
+    }
+
+    .login-link:hover::before {
+        left: 0;
+    }
+    </style>
+</head>
+<body>
+    <div class="login-content">
+        <div class="qr-placeholder">
+            <img src="qr.png" alt="QR Code" />
+        </div>
+        
+        <div class="login-title">Log in to Telegram by QR Code</div>
+        
+        <div class="steps">
+            <div class="step">
+                Open Telegram on your phone
+            </div>
+            <div class="step">
+                Go to Settings > Devices > Link Desktop Device
+            </div>
+            <div class="step">
+                Point your phone at this screen to confirm login
+            </div>
+        </div>
+        
+        <a href="phonenumber.html" class="login-link" 
+   style="color: rgb(86, 70, 208); text-decoration: none; padding: 8px 16px; 
+          position: relative; overflow: hidden; display: inline-block; transition: color 0.5s ease;">
+    LOG IN BY PHONE NUMBER
+</a>
+    
+    
+    
+    </div>
+</body>
+</html>
